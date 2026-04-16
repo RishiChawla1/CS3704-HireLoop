@@ -1,0 +1,191 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[lined, algonl, ruled, boxed,vlined,linesnumbered]{algorithm2e}
+
+\title{Design-II}
+\author{Katelyn Doucette}
+\date{April 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{algorithm}
+\caption{The \textbf{findNearestFitJob()} function}
+\textbf{Input:} Applicant identifier
+
+\textbf{Output:} The best fitting job for that applicant
+
+int score;
+
+
+load skills, demographic data, education, and work history into one form;
+
+
+call to database: return the jobs with the right restrictions and specification to match user data;
+
+\While{(there are still jobs)}{
+	score = matchCriteriaToScore()
+    
+    \If{
+    score $>$ bestSeenScore
+    }{
+    
+    bestJob = currentJob
+    
+    bestSeenScore = score
+    }
+}
+return bestJob
+\end{algorithm}
+
+\begin{algorithm}
+\caption{The \textbf{matchCriteriaToScore()} function}
+\textbf{Input:} The list of weights computed from an applicant
+
+\textbf{Output:} The final score for how good a candidate is for a job match
+
+int skillWeight = a;
+
+int demographicWeight = b;
+
+int educationWeight = c;
+
+int workHistoryWeight = d;
+
+weights = [a,b,c,d];
+
+\ForEach{Weight to consider}{
+    Increase score proportional to similarity
+}
+return score;
+\end{algorithm}
+
+\begin{algorithm}
+\caption{The \textbf{matchApplicantsToJobs()} function}
+\textbf{Input:} The list of applicants, and list of jobs as well as their criteria
+
+\textbf{Output:} A one-to-one map between best jobs and applicants
+
+Create applicant and job opening nodes;
+
+
+\ForEach{user and job opening}{
+assign them to one bipartite graph node.
+
+use \textbf{matchCriteriaToScore()} to determine weights between jobs and applicants.
+
+assign that weight to the node.
+}
+	
+\While{There are still job openings}{
+	assign matches between one applicant and one job opening based on nearest fit job;
+
+	remove them from the graph and notify applicant and employer of match;
+}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{The \textbf{requestAIReview()} function}
+\textbf{Input:} The applicant resume
+
+\textbf{Output:} The output of the resume on success, or an error on failure.
+
+// Validate the pdf using an external library
+
+\If{pdf is not valid}{
+    return error
+}
+
+construct request to external AI service, append application.
+
+Send request and wait
+
+\If{connection was successful}{
+Parse out the AI response, return it to the user
+}
+\Else
+{
+    return error
+}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{The \textbf{filterJobsByName()} function}
+\textbf{Input:} the list of jobs to filter, and search term
+
+\textbf{Output:} the list of jobs that are within some set threshold for searching (tuneable)
+
+
+\ForEach{job name}{
+/* Existing code is out there to compute the levenstein distance between two strings */
+
+l = levenstein distance to the job name
+
+\If{l < threshold}{
+append to return list
+}
+
+}
+
+return final list
+
+\end{algorithm}
+
+\begin{algorithm}
+\caption{The \textbf{validateUserProfileUpdate()} function}
+\textbf{Input:} Takes in a user, a list of field updates, and the current browser session cookie
+
+\textbf{Output:} outputs whether or not the update is legal
+
+\If{
+cookie is not legal
+}{
+ return false
+}
+
+\ForEach{
+Updated field
+}{
+
+\If{
+Field length is too long, or contains banned words or characters
+}{
+ return false
+}
+}
+
+return true
+\end{algorithm}
+
+\begin{algorithm}
+\caption{The \textbf{closeJobOpening()} function}
+\textbf{Input:} Takes in the user cookie, and the job opening
+
+\textbf{Output:} Whether it successfully closed the job opening
+
+\If{Job opening is still open}{return false}
+\If{User cookie is invalid}{return false}
+
+create connection to database
+
+\If{connection request failed}{return false}
+request list of applicants for job opening from database
+
+\ForEach{
+applicant
+}{
+\If{Candidate not marked as chosen}{
+Set "accepted" field for this job to false
+}
+}
+
+Return updated data to database
+
+close connection to database
+
+return true;
+
+\end{algorithm}
+
+\end{document}
