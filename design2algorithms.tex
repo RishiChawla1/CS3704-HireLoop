@@ -13,7 +13,7 @@
 \begin{algorithm}
 \caption{The \textbf{findNearestFitJob()} function}
 \textbf{Input:} Applicant identifier
-
+% algo title section
 \textbf{Output:} The best fitting job for that applicant
 
 int score;
@@ -23,7 +23,7 @@ load skills, demographic data, education, and work history into one form;
 
 
 call to database: return the jobs with the right restrictions and specification to match user data;
-
+% while loop for the job array
 \While{(there are still jobs)}{
 	score = matchCriteriaToScore()
     
@@ -42,7 +42,7 @@ return bestJob
 \begin{algorithm}
 \caption{The \textbf{matchCriteriaToScore()} function}
 \textbf{Input:} The list of weights computed from an applicant
-
+% final score calc
 \textbf{Output:} The final score for how good a candidate is for a job match
 
 int skillWeight = a;
@@ -54,7 +54,7 @@ int educationWeight = c;
 int workHistoryWeight = d;
 
 weights = [a,b,c,d];
-
+% weights for each job
 \ForEach{Weight to consider}{
     Increase score proportional to similarity
 }
@@ -115,7 +115,7 @@ Parse out the AI response, return it to the user
 \textbf{Input:} the list of jobs to filter, and search term
 
 \textbf{Output:} the list of jobs that are within some set threshold for searching (tuneable)
-
+%for each for the code and distances
 
 \ForEach{job name}{
 /* Existing code is out there to compute the levenstein distance between two strings */
@@ -137,7 +137,7 @@ return final list
 \textbf{Input:} Takes in a user, a list of field updates, and the current browser session cookie
 
 \textbf{Output:} outputs whether or not the update is legal
-
+% cookie logic
 \If{
 cookie is not legal
 }{
@@ -163,7 +163,7 @@ return true
 \textbf{Input:} Takes in the user cookie, and the job opening
 
 \textbf{Output:} Whether it successfully closed the job opening
-
+%check if job is still open
 \If{Job opening is still open}{return false}
 \If{User cookie is invalid}{return false}
 
@@ -179,7 +179,7 @@ applicant
 Set "accepted" field for this job to false
 }
 }
-
+% return updated data to our data storage
 Return updated data to database
 
 close connection to database
